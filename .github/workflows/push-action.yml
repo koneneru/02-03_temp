@@ -7,4 +7,4 @@ jobs:
       - name: Get rpository code
         uses: actions/checkout@v3
       - name Run tests
-        run: dotnet test
+        run: dotnet test PowerCollections.Tests/PowerCollections.Tests.csproj
