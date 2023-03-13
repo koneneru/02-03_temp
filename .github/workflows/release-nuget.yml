@@ -25,6 +25,6 @@ jobs:
     - name: Release nuget package
       uses: ncipollo/release-action@v1
       with:
-        artifacts: PowerCollections\bin\Release\*.nupkg
-        tag: v{{ steps.getVersion.outputs.info }}
+        artifacts: 'PowerCollections\bin\Release\*.nupkg'
+        tag: v${{ steps.getVersion.outputs.info }}
         token: ${{ secrets.ACTION_TOKEN }}
