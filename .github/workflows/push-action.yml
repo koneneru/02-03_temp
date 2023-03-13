@@ -6,12 +6,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Run building
-        run: dotnet build PowerCollections/PowerCollections.csproj
-  test:
-    runs-on: windows-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Run tests
-        run: dotnet test PowerCollections.Tests/PowerCollections.Tests.csproj
+      - name: Unstall the .Net Corte workload
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 6.0.x
+      - name: Build app
+        run: dotnet build PowerCollections
+      - name: Test app
+        run: dotnet test PowerCollections.Tests
