@@ -6,10 +6,10 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
-    - name: Install the .Net Corte workload
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 6.0.x
+    # - name: Install the .Net Corte workload
+    #   uses: actions/setup-dotnet@v3
+    #   with:
+    #     dotnet-version: 6.0.x
     - name: Build nuget package
       run: dotnet pack PowerCollections/PowerCollections.csproj -c Release
     - name: Publish nuget package
@@ -21,7 +21,7 @@ jobs:
       uses: mavrosxristoforos/get-xml-info@1.0
       with:
         xml-file: 'PowerCollections/PowerCollections.csproj'
-        xPath: '//versionPrefix'
+        xPath: '//VersionPrefix'
     - name: Release nuget package
       uses: ncipollo/release-action@v1
       with:
