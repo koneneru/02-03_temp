@@ -27,3 +27,4 @@ jobs:
       with:
         artifacts: PowerCollections\bin\Release\*.nupkg
         tag: v{{ steps.getVersion.outputs.info }}
+        token: ${{ secrets.ACTION_TOKEN }}
