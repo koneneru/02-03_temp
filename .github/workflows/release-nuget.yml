@@ -15,7 +15,7 @@ jobs:
     - name: Publish nuget package
       run: |
         $file = Get-ChildItem PowerCollections\bin\Release\*.nupkg | Sort-Object LastWriteTime | Select-Object -Last 1
-        dotnet nuget push $file.fullname --api-key ${{ secrets.NUGET_API_KEY }} --source 'https://nuget.pkg.github.com/koneneru/index.json'
+        dotnet nuget push $file.fullname --api-key ${{ secrets.ACTION_TOKEN }} --source https://nuget.pkg.github.com/koneneru/index.json
     - name: Get version
       id: getVersion
       uses: mavrosxristoforos/get-xml-info@1.0
