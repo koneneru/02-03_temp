@@ -18,7 +18,7 @@ jobs:
         dotnet nuget push $file.fullname --api-key ${{ secrets.GITHUB_TOKEN }} --source https://nuget.pkg.github.com/koneneru/index.json
     - name: Get version
       id: getVersion
-      uses: actions/mavrosxristoforos/get-xml-info@1.0
+      uses: mavrosxristoforos/get-xml-info@1.0
       with:
         xml-file: 'PowerCollections/PowerCollections.csproj'
         xPath: '//versionPrefix'
