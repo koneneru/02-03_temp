@@ -1,0 +1,29 @@
+name: release-nuget
+on: workflow_dispatch
+jobs:
+  build-and-publish-nuget:
+    runs-on: windows-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Install the .Net Corte workload
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+    - name: Build nuget package
+      run: dotnet pack PowerCollections/PowerCollections.csproj -c Release
+    - name: Publish nuget package
+      run: |
+        $file = Get-ChildItem PowerCollections\bin\Release\*.nupkg | Sort-Object LastWriteTime | Select-Object -Last 1
+        dotnet nuget push $file.fullname --api-key ${{ secrets.GITHUB_TOKEN }} --source https://nuget.pkg.github.com/koneneru/index.json
+    - name: Get version
+      id: getVersion
+      uses: actions/mavrosxristoforos/get-xml-info@1.0
+      with:
+        xml-file: 'PowerCollections/PowerCollections.csproj'
+        xPath: '//versionPrefix'
+    - name: Release nuget package
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: PowerCollections\bin\Release\*.nupkg
+        tag: v{{ steps.getVersion.outputs.info }}
