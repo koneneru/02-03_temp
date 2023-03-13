@@ -1,0 +1,10 @@
+name: push-action
+on: [push]
+jobs:
+  build :
+    runs-on: windows-latest
+    steps:
+      - name: Get rpository code
+        uses: actions/checkout@v3
+      - name Run tests
+        run: dotnet test
